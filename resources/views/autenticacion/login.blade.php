@@ -1,61 +1,58 @@
 @extends('autenticacion.app')
 @section('titulo', 'Sistema - Login')
 @section('contenido')
-<div class="card card-outline card-primary">
-  <div class="card-header">
-    <a
-      href="/"
-      class="link-dark text-center link-offset-2 link-opacity-100 link-opacity-50-hover"
-    >
-      <h1 class="mb-0"><b>Sistema</b>LTE</h1>
-    </a>
-  </div>
-  <div class="card-body login-card-body">
-    <p class="login-box-msg">Ingrese sus credenciales</p>
-    @if(session('error'))
-      <div class="alert alert-danger">
-        {{session('error')}}
-      </div>
+<div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+  <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Inicio de Sesión</h2>
+     @if(session('error'))
+       <div class="text-xs text-red-700 font-medium block">
+            <span>{{session('error')}}</span><br>
+        </div>
     @endif
     @if(Session::has('mensaje'))
-        <div class="alert alert-info alert-dismissible fade show mt-2">
-            {{Session::get('mensaje')}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+         <div class="text-xs text-red-700 font-medium block">
+            <span>{{Session::get('mensaje')}}</span><br>
         </div>
     @endif
-    <form action="{{route('login.post')}}" method="post">
-      @csrf
-      <div class="input-group mb-1">
-        <div class="form-floating">
-          <input id="loginEmail" type="email" name="email" value="{{old('email')}}" class="form-control" value="" placeholder="" />
-          <label for="loginEmail">Email</label>
-        </div>
-        <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+    <form class="space-y-4" action="{{route('login.post')}}" method="post">
+    @csrf
+    <div>
+        <label for="loginEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input
+          id="loginEmail"
+          type="email"
+          name="email"
+          value="{{old('email')}}"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+          placeholder="your@email.com"
+        />
       </div>
-      <div class="input-group mb-1">
-        <div class="form-floating">
-          <input id="loginPassword" type="password" name="password" class="form-control" placeholder="" />
-          <label for="loginPassword">Password</label>
-        </div>
-        <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+
+      <div>
+        <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+        <input
+          id="loginPassword"
+          type="password"
+          name="password"
+          type="password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+          placeholder="••••••••"
+        />
       </div>
-      <p class="mb-1"><a href="{{route('password.request')}}">Recuperar password</a></p>
-      <!--begin::Row-->
-      <div class="row">
-        <!-- /.col -->
-        <div class="col-4">
-          <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary">Acceder</button>
-          </div>
-        </div>
-        <!-- /.col -->
+
+      <div class="flex items-center justify-between">
+        <a href="{{route('password.request')}}" class="text-sm text-indigo-600 hover:text-indigo-500">Recuperar contraseña?</a>
       </div>
-      <!--end::Row-->
+
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors">
+        Ingresar
+      </button>
     </form>
-    <!-- /.social-auth-links -->
+
+    <div class="mt-6 text-center text-sm text-gray-600">
+      Crear nueva cuenta
+      <a href="{{route('registro')}}" class="text-indigo-600 hover:text-indigo-500 font-medium">Registrarse</a>
+    </div>
   </div>
-  <!-- /.login-card-body -->
 </div>
 @endsection
-
-      
